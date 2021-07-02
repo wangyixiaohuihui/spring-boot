@@ -350,6 +350,16 @@ class SpringApplicationTests {
 		assertThat(this.context).isInstanceOf(StaticApplicationContext.class);
 	}
 
+
+	@Test
+	@SuppressWarnings("deprecation")
+	void specificWebApplicationContextClass() {
+		SpringApplication application = new SpringApplication(ExampleConfig.class);
+		application.run();
+
+	}
+
+
 	@Test
 	@SuppressWarnings("deprecation")
 	void specificWebApplicationContextClassDetectWebApplicationType() {

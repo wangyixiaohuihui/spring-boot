@@ -314,6 +314,7 @@ public class SpringApplication {
 	}
 
 	/**
+	 * 启动类
 	 * Run the Spring application, creating and refreshing a new
 	 * {@link ApplicationContext}.
 	 * @param args the application arguments (usually passed from a Java main method)
@@ -332,6 +333,7 @@ public class SpringApplication {
 			ConfigurableEnvironment environment = prepareEnvironment(listeners, bootstrapContext, applicationArguments);
 			configureIgnoreBeanInfo(environment);
 			Banner printedBanner = printBanner(environment);
+			// 应用上下文 servlet    AnnotationConfigServletWebServerApplicationContext
 			context = createApplicationContext();
 			context.setApplicationStartup(this.applicationStartup);
 			prepareContext(bootstrapContext, context, environment, listeners, applicationArguments, printedBanner);
@@ -399,7 +401,9 @@ public class SpringApplication {
 			ConfigurableEnvironment environment, SpringApplicationRunListeners listeners,
 			ApplicationArguments applicationArguments, Banner printedBanner) {
 		context.setEnvironment(environment);
+		// 回调方法，spring容器创建之后做一些额外的事情
 		postProcessApplicationContext(context);
+		// 初始化-
 		applyInitializers(context);
 		listeners.contextPrepared(context);
 		bootstrapContext.close(context);
@@ -686,6 +690,7 @@ public class SpringApplication {
 		if (logger.isDebugEnabled()) {
 			logger.debug("Loading source " + StringUtils.arrayToCommaDelimitedString(sources));
 		}
+		// 创建BeanDefinitionLoader 方法
 		BeanDefinitionLoader loader = createBeanDefinitionLoader(getBeanDefinitionRegistry(context), sources);
 		if (this.beanNameGenerator != null) {
 			loader.setBeanNameGenerator(this.beanNameGenerator);

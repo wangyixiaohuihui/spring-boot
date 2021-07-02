@@ -56,6 +56,7 @@ public class ConfigurationWarningsApplicationContextInitializer
 
 	@Override
 	public void initialize(ConfigurableApplicationContext context) {
+		// 注册后置处理器 ConfigurationWarningPostProcessor
 		context.addBeanFactoryPostProcessor(new ConfigurationWarningsPostProcessor(getChecks()));
 	}
 
